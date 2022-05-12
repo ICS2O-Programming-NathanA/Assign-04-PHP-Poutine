@@ -37,7 +37,7 @@
 					
 					<br></br>
 					<!-- checkboxes -->
-            <input type="checkbox" value="bacon" name="bacon">bacon
+            <input type="checkbox" value="bacon" name="bacon">Bacon
             <input type="checkbox" value="pulledPork" name="pulledPork">Pulled Pork
             <input type="checkbox" value="butterChicken" name="butterChicken">Butter Chicken
             <input type="checkbox" value="taterTots" name="taterTots">Tater Tots
@@ -81,7 +81,7 @@
 			} if(isset($_POST['pulledPork'])) {
 					$pulledPork = 3;	
 			}
-				if(isset($_POST['butterChick'])){
+				if(isset($_POST['butterChicken'])){
 					$butterChicken = 3;
 				}
 				if(isset($_POST['taterTots'])){
