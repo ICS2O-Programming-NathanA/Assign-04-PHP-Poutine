@@ -23,39 +23,47 @@
 			<br><br>
 
         <form method="POST"
-
-
-					<!-- dropdown menu -->
-								<label for="size">Size:</label>
-				<select name="size" id="size">
-        	<optgroup label="Size">
-						<option value="small">Small</option>
-						<option value="medium">Medium</option>
-						<option value="large">Large</option>
-					</optgroup>
-				</select>
+					<!-- dropdown menu for sizes-->
+					<label for="size">Size:</label>
+					<select name="size" id="size">
+	        	<optgroup label="Size">
+							<option value="small">Small</option>
+							<option value="medium">Medium</option>
+							<option value="large">Large</option>
+						</optgroup>
+					</select>
 					
 					<br></br>
-					<!-- checkboxes -->
+					<!-- checkboxes for toppings -->
             <input type="checkbox" value="bacon" name="bacon">Bacon
             <input type="checkbox" value="pulledPork" name="pulledPork">Pulled Pork
             <input type="checkbox" value="butterChicken" name="butterChicken">Butter Chicken
             <input type="checkbox" value="taterTots" name="taterTots">Tater Tots
 
 					<br></br>
-					<!-- Radio Buttons -->
+					<!-- Radio Buttons for drinks -->
             <input type="radio" value="no" name="no">no
             <input type="radio" value="yes" name="yes">yes
 
-				<br></br>
-			<input type = "submit" name = "enter" value="Calculate">  
-			<br></br>
+					<br></br>
+					<!-- button for order -->
+					<input type = "submit" name = "enter" value="Order">  
+					<br></br>
 				</form>
 
 		<?php  
 			if(isset($_POST['enter'])) {
 				// declare constants
 				define('HST', 0.13);
+				define('SMALL_PRICE', 7.99);
+				define('MEDIUM_PRICE', 12.49);
+				define('LARGE_PRICE', 18.99);
+				define('BACON_PRICE', 1);
+				define('PULLEDPORK_PRICE', 3);
+				define('BUTTERCHICKEN_PRICE', 3);
+				define('TATERTOTS_PRICE', 1);
+				define('DRINK_PRICE', 2);
+				
 				//declare variables
 				$size = $_POST['size'];
 				$sizes = 0;
@@ -65,34 +73,47 @@
 				$taterTots = 0;
 				$drink = 0;
 				
-				// IF statements
+				//IF small size is selected then set small price
 				if ($size == "small") {
-					$sizes = 7.99;
+					$sizes = SMALL_PRICE;
 				} 
+				//IF medium size is selected then set medium price
 				elseif ($size == "medium") {
-					$sizes = 12.49;
+					$sizes = MEDIUM_PRICE;
 				}
+				//IF large size is selected then set large price
 				elseif ($size == "large") {
-					$sizes = 18.99;
+					$sizes = LARGE_PRICE;
 				}
-				
+
+				//IF bacon is selected then set bacon price
 				if(isset($_POST['bacon'])){
-					$bacon = 1;
-			} if(isset($_POST['pulledPork'])) {
-					$pulledPork = 3;	
+					$bacon = BACON_PRICE;
+			} 
+			//IF pulled pork is selected then set bacon price
+			if(isset($_POST['pulledPork'])) {
+					$pulledPork = PULLEDPORK_PRICE;	
 			}
+			//IF butter chicken is selected then set bacon price
 				if(isset($_POST['butterChicken'])){
-					$butterChicken = 3;
+					$butterChicken = BUTTERCHICKEN_PRICE;
 				}
+				//IF tater tots is selected then set bacon price
 				if(isset($_POST['taterTots'])){
-					$taterTots = 1;
+					$taterTots = TATERTOTS_PRICE;
 			}
+
+			//IF drinks is selected then set drink price
 				if(isset($_POST['yes'])){
-					$drink = 2;
+					$drink = DRINK_PRICE;
 			}
+				
+			//Calculations for subtotal, tax and total
 				$subtotal = ($sizes + $bacon + $pulledPork + $butterChicken + $taterTots + $drink);
 				$tax = $subtotal * HST;
 				$total = $subtotal + $tax;
+				
+				//Display results
 				echo "<p>Your subtotal is $" . round($subtotal, 2);
 				echo "<p>Your tax is $" . round($tax, 2);
 				echo "<p>Your total is $" . round($total, 2);
